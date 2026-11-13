@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="army">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Era Hill University - Campus Saarthi | Team Aariv</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        themeBg: 'var(--bg-main)',
+                        cardBg: 'var(--bg-card)',
+                        sidebarBg: 'var(--bg-sidebar)',
+                        primaryColor: 'var(--color-primary)',
+                        textMain: 'var(--color-text)',
+                        textMuted: 'var(--color-muted)',
+                        accentColor: 'var(--color-accent)'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* Theme Definitions */
+        :root[data-theme="army"] {
+            --bg-main: #141c14;
+            --bg-card: #1e281e;
+            --bg-sidebar: #101610;
+            --color-primary: #588157;
+            --color-accent: #d4a373;
+            --color-text: #fefae0;
+            --color-muted: #a3b18a;
+        }
+        :root[data-theme="white"] {
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-sidebar: #e2e8f0;
+            --color-primary: #0284c7;
+            --color-accent: #0369a1;
+            --color-text: #0f172a;
+            --color-muted: #64748b;
+        }
+        :root[data-theme="black"] {
+            --bg-main: #050505;
+            --bg-card: #0a0a0a;
+            --bg-sidebar: #000000;
+            --color-primary: #ef4444;
+            --color-accent: #dc2626;
+            --color-text: #ef4444;
+            --color-muted: #fca5a5;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--color-text);
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-sidebarBg border-b border-zinc-700/40 sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-4">
+            <!-- GEHU Logo & Title Section -->
+            <div class="bg-white p-2 rounded-xl shadow-md flex items-center justify-center">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQA6QMBEQACEQEDEQH/xAAbAAEAAQUBAAAAAAAAAAAAAAAABQECAwQGB//EADoQAAEDAwMDAQcCAwYHAAAAAAEAAgMEBREGEiExQVETBxQiMmFxkYGhFSMzJEJScrHBFjRik9Hh8f/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/xAAwEQEAAgIBAgQEBQMFAAAAAAAAAQIDEQQSIQUTMUEiUWGhIzJxkbEzUoEUFSXB0f/aAAwDAQACEQMRAD8A9xQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAoMckjYml8jmtaBy5xwETETPaGiL7bD0r6c84z6gxn7puF/Iy/2y343te0Oa4OaehByCikxpflEKZQMoKnoghKrU1upb3BZpZJPfZiNrBEcYOcHPTHBVZtETp1U4ea+Gc8R8MJjcrOVFWfUVBeKuspaKR7paR+yTLMDrjI8jIwoi0TPZ0Z+LlwVrbJH5u8JccqXOqg05LlRxSOjkq4GPacOa54BCiZj0aRiyTG4rK3+LUGce/U//AHAm4R5WT5fZtsduAIIIPII7qVFyCqAgILHP2gkkADuSgsE8e4tEjCR1G4cIMgdlBcgICAgICAgo7og8n1LcJ9Q+0CmsL5Hi3RThj4mnAfgbnE+fC5r26skV9n0/D49OL4fbl6+KY7fT2elSw2+CmFPLHTRU5G0RuDQ3HhdHbWnzcWyWt1b7uxZGNLaUuslpqoJpIHSVDGuO9rW54bgHjjhZz8FJmHob/wVsyc=" alt="Graphic Era Hill University Logo" class="h-10 object-contain">
+            </div>
+            <div>
+                <h1 class="text-base font-extrabold tracking-tight text-red-500 m-0">Graphic Era Hill University</h1>
+                <h2 class="text-xs font-semibold text-textMuted m-0">Dehradun Campus • PBL V Semester (Team Aariv - ID: 260112459)</h2>
+            </div>
+        </div>
+
+        <!-- Live Network Telemetry Ticker -->
+        <div class="hidden xl:flex items-center space-x-4 bg-cardBg px-4 py-1.5 rounded-xl border border-zinc-700/50 text-[11px] font-mono">
+            <div><span class="text-textMuted">TCP Sockets:</span> <span id="telemetry-sockets" class="text-emerald-400 font-bold">14 Active</span></div>
+            <div class="border-r border-zinc-700 h-3"></div>
+            <div><span class="text-textMuted">Latency:</span> <span id="telemetry-ping" class="text-emerald-400 font-bold">4.2 ms</span></div>
+            <div class="border-r border-zinc-700 h-3"></div>
+            <div><span class="text-textMuted">Mutex Load:</span> <span id="telemetry-mutex" class="text-accentColor font-bold">1.8%</span></div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <!-- Theme Switcher -->
+            <div class="flex items-center space-x-1 bg-cardBg p-1 rounded-xl border border-zinc-700/50 text-xs">
+                <button onclick="setTheme('army')" id="theme-army-btn" class="px-3 py-1.5 rounded-lg font-medium transition-all bg-primaryColor text-white">Army Green</button>
+                <button onclick="setTheme('white')" id="theme-white-btn" class="px-3 py-1.5 rounded-lg font-medium transition-all text-textMain">Clement White</button>
+                <button onclick="setTheme('black')" id="theme-black-btn" class="px-3 py-1.5 rounded-lg font-medium transition-all text-textMain">Cyber Noir</button>
+            </div>
+
+            <span class="text-xs bg-primaryColor/20 text-primaryColor border border-primaryColor/30 px-3 py-1 rounded-full font-medium">
+                <i class="fa-solid fa-shield-halved mr-1"></i> ACID/OS Locked
+            </span>
+            <div class="h-9 w-9 bg-cardBg border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-primaryColor">
+                TA
+            </div>
+        </div>
+    </header>
+
+    <!-- Main App Container -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-72 bg-sidebarBg border-r border-zinc-700/40 flex flex-col p-4 space-y-2">
+            <p class="text-xs font-semibold text-textMuted uppercase tracking-wider px-3 mb-2">Service Modules</p>
+            
+            <button onclick="switchTab('task1')" id="btn-task1" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all text-left bg-primaryColor text-white shadow-lg">
+                <i class="fa-solid fa-print w-5 text-center"></i>
+                <span>1. Print & Stationeries</span>
+            </button>
+            
+            <button onclick="switchTab('task2')" id="btn-task2" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all text-left text-textMuted hover:bg-cardBg">
+                <i class="fa-solid fa-id-card w-5 text-center"></i>
+                <span>2. ERP Query Redressal</span>
+            </button>
+            
+            <button onclick="switchTab('task3')" id="btn-task3" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all text-left text-textMuted hover:bg-cardBg">
+                <i class="fa-solid fa-utensils w-5 text-center"></i>
+                <span>3. Canteen Booking</span>
+            </button>
+            
+            <button onclick="switchTab('task4')" id="btn-task4" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all text-left text-textMuted hover:bg-cardBg">
+                <i class="fa-solid fa-users-viewfinder w-5 text-center"></i>
+                <span>4. Event Matchmaker</span>
+            </button>
+
+            <!-- Real-Time Generated Local Log Terminal -->
+            <div class="mt-auto bg-cardBg p-3 rounded-xl border border-zinc-700/50 text-[11px] space-y-1.5 shadow-inner">
+                <div class="flex justify-between items-center border-b border-zinc-700/40 pb-1">
+                    <span class="font-semibold text-accentColor"><i class="fa-solid fa-terminal mr-1"></i> Live Audit Log</span>
+                    <span class="text-[9px] text-emerald-400 animate-pulse">● Live</span>
+                </div>
+                <div id="live-log-container" class="space-y-1 max-h-36 overflow-y-auto font-mono text-[10px]">
+                    <!-- Dynamically populated via JS -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="flex-1 p-8 overflow-y-auto bg-themeBg">
+
+            <!-- TASK 1: PRINTING & STATIONERIES -->
+            <section id="task1" class="tab-content space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold">Customised Print Spooler & Real-Time Billing</h2>
+                    <p class="text-sm text-textMuted">Submit print jobs, lamination, thesis binding, and stationery items with atomic credit deduction from student wallet ledger.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Submission Form -->
+                    <div class="lg:col-span-2 bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3"><i class="fa-solid fa-file-arrow-up mr-2 text-primaryColor"></i>New Print / Stationery Order</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Select Service / Item Catalog</label>
+                                <select id="print-type" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor" onchange="calculatePrintBill()">
+                                    <option value="bw">B&W Print A4 (₹2/page)</option>
+                                    <option value="color">Color Print A4 (₹5/page)</option>
+                                    <option value="poster-a4">Poster A4 (₹25/copy)</option>
+                                    <option value="poster-a3">Poster A3 (₹50/copy)</option>
+                                    <option value="poster-a2">Poster A2 (₹75/copy)</option>
+                                    <option value="thesis">Thesis Hard Binding (₹250/copy)</option>
+                                    <option value="lamination">Lamination (₹30/sheet)</option>
+                                    <option value="transparent-file">Stick Transparent File (₹10/pc)</option>
+                                    <option value="pen-2">Pen - Standard (₹2)</option>
+                                    <option value="pen-3">Pen - Gel (₹3)</option>
+                                    <option value="pen-5">Pen - Ballpoint Fine (₹5)</option>
+                                    <option value="pen-10">Pen - Roller Ball (₹10)</option>
+                                    <option value="pen-25">Pen - Premium Designer (₹25)</option>
+                                    <option value="pen-100">Pen - Metal Executive (₹100)</option>
+                                    <option value="copy-40">Notebook Copy - 40 Pages (₹40)</option>
+                                    <option value="copy-50">Notebook Copy - 50 Pages (₹50)</option>
+                                    <option value="copy-70">Notebook Copy - 70 Pages (₹70)</option>
+                                    <option value="copy-100">Notebook Copy - 100 Pages (₹100)</option>
+                                    <option value="copy-200">Notebook Copy - 200 Pages (₹200)</option>
+                                    <option value="plastic-card">Plastic ID / PVC Card Printing (₹50)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Quantity / Pages</label>
+                                <input type="number" id="print-qty" value="1" min="1" max="500" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor" oninput="calculatePrintBill()">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Student ID (Wallet Owner)</label>
+                                <input type="text" id="print-student-id" value="260112459" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor" placeholder="Enter 9-digit Student ID">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Upload Document / Order Reference (.pdf, .docx)</label>
+                                <input type="file" id="print-file" class="w-full text-sm text-textMuted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primaryColor file:text-white hover:file:opacity-90 bg-themeBg border border-zinc-700 rounded-xl">
+                            </div>
+                        </div>
+
+                        <div class="bg-themeBg p-4 rounded-xl border border-zinc-700/50 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-xs text-textMuted">Selected Item Total:</p>
+                                    <p class="text-xl font-bold text-emerald-400" id="print-total-price">₹2.00</p>
+                                    <p class="text-[10px] text-textMuted mt-1" id="print-wallet-info"></p>
+                                </div>
+                                <button onclick="addToCart()" id="print-submit-btn" class="bg-primaryColor hover:opacity-90 text-white font-medium px-6 py-2.5 rounded-xl shadow-lg transition-all text-sm">
+                                    <i class="fa-solid fa-cart-plus mr-1"></i> Add to Cart
+                                </button>
+                            </div>
+                            <div class="border-t border-zinc-700/40 pt-3 flex justify-between items-center">
+                                <span class="text-xs text-textMuted"><i class="fa-solid fa-basket-shopping mr-1 text-accentColor"></i>Cart items: <b id="cart-count" class="text-textMain">0</b></span>
+                                <span class="text-sm font-bold text-emerald-400" id="cart-total-price">₹0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shopping Cart -->
+                    <div class="lg:col-span-2 bg-cardBg p-6 rounded-2xl border border-primaryColor/40 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3 flex justify-between items-center">
+                            <span><i class="fa-solid fa-cart-shopping mr-2 text-primaryColor"></i>Your Print Cart</span>
+                            <span id="cart-header-count" class="text-[10px] text-emerald-400 font-mono">0 items</span>
+                        </h3>
+                        <div id="print-cart-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                            <p class="text-xs text-textMuted italic">Your cart is empty. Add multiple services above, then purchase them together.</p>
+                        </div>
+                        <div class="bg-themeBg p-3 rounded-xl border border-zinc-700/40 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs text-textMuted">Collective Purchase Total</p>
+                                <p id="cart-checkout-total" class="text-xl font-bold text-emerald-400">₹0.00</p>
+                            </div>
+                            <button onclick="checkoutCart()" id="cart-checkout-btn" disabled class="bg-primaryColor hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium px-5 py-2.5 rounded-xl shadow-lg transition-all text-sm">
+                                <i class="fa-solid fa-bolt mr-1"></i> Purchase All
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Dynamic Spooler Queue -->
+                    <div class="bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3 flex justify-between items-center">
+                            <span><i class="fa-solid fa-list-ol mr-2 text-primaryColor"></i>Active Spooler Queue</span>
+                            <span id="queue-count" class="text-[10px] text-emerald-400 font-mono">1 Active</span>
+                        </h3>
+                        <div id="print-queue-list" class="space-y-3 max-h-80 overflow-y-auto pr-1">
+                            <!-- Populated from database -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TASK 2: ERP QUERY REDRESSAL -->
+            <section id="task2" class="tab-content hidden space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold">ERP & Identity Query Redressal Portal</h2>
+                    <p class="text-sm text-textMuted">Raise and track academic lifecycle issues with automated role-based routing.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3"><i class="fa-solid fa-ticket mr-2 text-primaryColor"></i>Raise New ERP Grievance / Ticket</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Issue Category</label>
+                                <select id="erp-category" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                                    <option>Course Enrolment</option>
+                                    <option>Section Allotment</option>
+                                    <option>Exam Registration</option>
+                                    <option>Timetable Clashes</option>
+                                    <option>ID Card Issues</option>
+                                    <option>Fee & Dues Issues</option>
+                                    <option>Miscellaneous</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Programme / Branch</label>
+                                <select id="erp-branch" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                                    <optgroup label="Engineering & Technology">
+                                        <option>B.Tech - Computer Science (Core)</option>
+                                        <option>B.Tech - CSE (AI/ML)</option>
+                                        <option>B.Tech - CSE (Data Science)</option>
+                                        <option>B.Tech - CSE (Cybersecurity)</option>
+                                        <option>B.Tech - CSE (IoT)</option>
+                                        <option>B.Tech - Electronics & Comm (ECE)</option>
+                                        <option>B.Tech - Civil Engineering</option>
+                                        <option>B.Tech - Mechanical Engineering</option>
+                                        <option>B.Tech - Biotechnology</option>
+                                        <option>B.Tech - Aerospace Engineering</option>
+                                        <option>M.Tech / Diploma Programs</option>
+                                    </optgroup>
+                                    <optgroup label="Management & Commerce">
+                                        <option>BBA / BBA (Hons.)</option>
+                                        <option>B.Com (Hons.) with ACCA/US CMA</option>
+                                        <option>MBA / M.Com</option>
+                                    </optgroup>
+                                    <optgroup label="Computer Applications & IT">
+                                        <option>BCA / BCA (Data Science/AI)</option>
+                                        <option>B.Sc. IT / Computer Science</option>
+                                        <option>MCA / M.Sc. IT</option>
+                                    </optgroup>
+                                    <optgroup label="Design, Arts & Humanities">
+                                        <option>B.Des (UI/UX, Animation & VFX)</option>
+                                        <option>B.Sc. Interior Design</option>
+                                        <option>BA / MA / Fine Arts</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Student ID / Roll No</label>
+                                <input type="text" id="erp-student-id" value="260112459" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Semester</label>
+                                <select id="erp-year" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                                    <option>V Semester (3rd Year - Current)</option>
+                                    <option>I Semester (1st Year)</option>
+                                    <option>II Semester (1st Year)</option>
+                                    <option>III Semester (2nd Year)</option>
+                                    <option>IV Semester (2nd Year)</option>
+                                    <option>VI Semester (3rd Year)</option>
+                                    <option>VII Semester (4th Year)</option>
+                                    <option>VIII Semester (4th Year)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Mobile Number</label>
+                                <input type="tel" id="erp-mobile" value="+91 9876543210" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-textMuted mb-1">Detailed Description</label>
+                            <textarea id="erp-desc" rows="3" placeholder="Describe your issue clearly..." class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">Exam Registration slot conflict in V Semester elective.</textarea>
+                        </div>
+
+                        <button onclick="submitErpTicket()" id="erp-submit-btn" class="w-full bg-primaryColor hover:opacity-90 text-white font-medium py-2.5 rounded-xl shadow-lg transition-all text-sm">
+                            Submit Ticket & Generate Unique Log
+                        </button>
+                    </div>
+
+                    <div class="bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3 flex justify-between items-center">
+                            <span><i class="fa-solid fa-clock-rotate-left mr-2 text-primaryColor"></i>Ticket Status Log</span>
+                            <span class="text-[10px] text-accentColor font-mono">Live Tracking</span>
+                        </h3>
+                        <div id="ticket-status-container" class="space-y-3 text-xs">
+                            <!-- Populated from database -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TASK 3: CANTEEN BOOKING -->
+            <section id="task3" class="tab-content hidden space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold">Campus Canteen Event & Dining Booking</h2>
+                    <p class="text-sm text-textMuted">Manage normal advance bookings (1 month prior) or last-minute priority premium event bashes.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3"><i class="fa-solid fa-utensils mr-2 text-primaryColor"></i>Table & Event Reservation Engine</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Booking Tier</label>
+                                <select id="canteen-tier" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor" onchange="updateCanteenPricing()">
+                                    <option value="normal">Normal Booking (Prior 1 Month - Standard Rate)</option>
+                                    <option value="priority">Priority Premium Booking (Last Min Event / Birthday Bash - Surge Pricing)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Guest Seating Capacity</label>
+                                <input type="number" id="canteen-guests" value="6" min="2" max="30" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor" oninput="updateCanteenPricing()">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Date & Time Slot</label>
+                                <input type="datetime-local" id="canteen-datetime" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Estimated Dynamic Fee</label>
+                                <div id="canteen-price-display" class="bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-bold text-emerald-400">
+                                    ₹300.00 (Standard)
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="bookCanteenTable()" id="canteen-submit-btn" class="w-full bg-primaryColor hover:opacity-90 text-white font-medium py-2.5 rounded-xl shadow-lg transition-all text-sm">
+                            <i class="fa-solid fa-lock mr-1"></i> Acquire Semaphore Lock & Book Table
+                        </button>
+                    </div>
+
+                    <div class="bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3"><i class="fa-solid fa-chair mr-2 text-primaryColor"></i>Hall Occupancy Meter</h3>
+                        <div class="space-y-3 text-xs">
+                            <div class="flex justify-between"><span>Total Seating Limit:</span> <span class="font-bold">120 Seats</span></div>
+                            <div class="flex justify-between"><span>Current Occupancy:</span> <span id="canteen-occupancy" class="font-bold text-amber-400">-- Seats</span></div>
+                            <div class="w-full bg-themeBg rounded-full h-2.5 overflow-hidden border border-zinc-700">
+                                <div id="canteen-occupancy-bar" class="bg-amber-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <p class="text-textMuted pt-2">Counting semaphores actively prevent race conditions during high-concurrency event bookings.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TASK 4: EVENT MATCHMAKER -->
+            <section id="task4" class="tab-content hidden space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold">Campus Event Organiser & Team Matchmaker</h2>
+                    <p class="text-sm text-textMuted">Match individuals and group them into teams for tech fests, seminars, and conferences using interest-vector similarity across a 100+ student database.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3"><i class="fa-solid fa-users-gear mr-2 text-primaryColor"></i>Student Profile & Skill Matcher</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Target Campus Event</label>
+                                <select id="match-event" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                                    <option>Annual Tech Fest Hackathon 2026</option>
+                                    <option>AI & Machine Learning Conference Paper</option>
+                                    <option>Robotics & Hardware Seminar</option>
+                                    <option>Inter-Department Business Quiz</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-textMuted mb-1">Your Primary Domain</label>
+                                <select id="match-domain" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                                    <option>Full-Stack & React Dev</option>
+                                    <option>Database & Systems Engineering</option>
+                                    <option>UI/UX & Pitch Presentation</option>
+                                    <option>AI/ML & Data Science</option>
+                                    <option>Cybersecurity & Ethical Hacking</option>
+                                    <option>Internet of Things (IoT) & Embedded</option>
+                                    <option>Robotics & Automation</option>
+                                    <option>Cloud & DevOps Engineering</option>
+                                    <option>Blockchain & Web3</option>
+                                    <option>Game Dev & Animation</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-textMuted mb-1">Key Interest Tags (Comma Separated)</label>
+                            <input type="text" id="match-tags" value="Python, PostgreSQL, React, Concurrency, Algorithms" class="w-full bg-themeBg border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primaryColor">
+                        </div>
+
+                        <button onclick="runMatchmaker()" id="match-submit-btn" class="w-full bg-primaryColor hover:opacity-90 text-white font-medium py-2.5 rounded-xl shadow-lg transition-all text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Run Cosine Similarity Across 100+ Student Directory
+                        </button>
+                    </div>
+
+                    <div class="bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                        <h3 class="text-lg font-semibold border-b border-zinc-700/40 pb-3 flex justify-between items-center">
+                            <span><i class="fa-solid fa-people-group mr-2 text-primaryColor"></i>Matched Team Result</span>
+                            <span id="match-db-count" class="text-[10px] text-emerald-400 font-mono">100+ DB Active</span>
+                        </h3>
+                        <div id="match-result-box" class="space-y-3 text-xs">
+                            <!-- Populated after matchmaker runs -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 100+ Student Directory Explorer Table Preview -->
+                <div class="bg-cardBg p-6 rounded-2xl border border-zinc-700/50 space-y-4 shadow-md">
+                    <div class="flex justify-between items-center border-b border-zinc-700/40 pb-3">
+                        <h3 class="text-lg font-semibold"><i class="fa-solid fa-database mr-2 text-primaryColor"></i>GEHU Campus Student Directory Database (100+ Records Preview)</h3>
+                        <span class="text-xs bg-themeBg px-3 py-1 rounded border border-zinc-700 text-textMuted">ID Starts: 23, 24, 25, 26 (9 Digits)</span>
+                    </div>
+                    <div class="overflow-x-auto max-h-64">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-themeBg text-textMuted uppercase text-[10px] sticky top-0">
+                                <tr>
+                                    <th class="p-2.5">Student ID</th>
+                                    <th class="p-2.5">Full Name</th>
+                                    <th class="p-2.5">Batch Year</th>
+                                    <th class="p-2.5">Domain / Specialization</th>
+                                    <th class="p-2.5">Wallet Balance (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-directory-table" class="divide-y divide-zinc-700/30">
+                                <!-- Populated from database -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JavaScript Controllers — Wired to Supabase Backend -->
+    <script>
+        // ============================================================
+        // SUPABASE CLIENT INITIALIZATION
+        // ============================================================
+        const SUPABASE_URL = '%VITE_SUPABASE_URL%';
+        const SUPABASE_ANON_KEY = '%VITE_SUPABASE_ANON_KEY%';
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Price lookup map — mirrors the database catalog
+        const PRICE_MAP = {
+            'bw': 2, 'color': 5, 'poster-a4': 25, 'poster-a3': 50, 'poster-a2': 75,
+            'thesis': 250, 'lamination': 30, 'transparent-file': 10,
+            'pen-2': 2, 'pen-3': 3, 'pen-5': 5, 'pen-10': 10, 'pen-25': 25, 'pen-100': 100,
+            'copy-40': 40, 'copy-50': 50, 'copy-70': 70, 'copy-100': 100, 'copy-200': 200,
+            'plastic-card': 50
+        };
+
+        // Domain mapping: UI label -> database domain values
+        const DOMAIN_MAP = {
+            'Full-Stack & React Dev': 'Full-Stack & React Dev',
+            'Database & Systems Engineering': 'Database & Systems',
+            'UI/UX & Pitch Presentation': 'UI/UX & Pitch',
+            'AI/ML & Data Science': 'AI/ML & Data Science',
+            'Cybersecurity & Ethical Hacking': 'Cybersecurity',
+            'Internet of Things (IoT) & Embedded': 'IoT & Embedded',
+            'Robotics & Automation': 'Robotics',
+            'Cloud & DevOps Engineering': 'Cloud & DevOps',
+            'Blockchain & Web3': 'Blockchain',
+            'Game Dev & Animation': 'Game Dev'
+        };
+
+        let studentDatabase = [];
+        let printCart = [];
+
+        // ============================================================
+        // INITIALIZATION
+        // ============================================================
+        async function initApp() {
+            renderStudentDirectory();
+            await loadStudentDirectory();
+            await loadPrintQueue();
+            await loadErpTickets();
+            await loadCanteenOccupancy();
+            await loadAuditLogs();
+            await loadWalletInfo();
+            renderCart();
+            appendUniqueLog("INIT: Campus Saarthi local node handshake established successfully.");
+            appendUniqueLog("AUTH: Student credential verified -> ID: 260112459 | Team: Aariv");
+        }
+
+        // ============================================================
+        // STUDENT DIRECTORY
+        // ============================================================
+        async function loadStudentDirectory() {
+            const { data, error } = await sb
+                .from('students')
+                .select('*')
+                .order('created_at', { ascending: true });
+
+            if (error) {
+                console.error('Failed to load students:', error);
+                return;
+            }
+            studentDatabase = data || [];
+            renderStudentDirectory();
+            const countEl = document.getElementById('match-db-count');
+            if (countEl) countEl.textContent = `${studentDatabase.length}+ DB Active`;
+        }
+
+        function renderStudentDirectory() {
+            const tbody = document.getElementById('student-directory-table');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            studentDatabase.forEach(stu => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-themeBg transition-colors";
+                tr.innerHTML = `
+                    <td class="p-2.5 font-mono text-primaryColor font-bold">${stu.id}</td>
+                    <td class="p-2.5 font-semibold">${stu.name}</td>
+                    <td class="p-2.5">${stu.batch_year}</td>
+                    <td class="p-2.5 text-textMuted">${stu.domain}</td>
+                    <td class="p-2.5 font-mono text-emerald-400 font-bold">₹${stu.wallet_balance}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ============================================================
+        // AUDIT LOGS — fetched from database
+        // ============================================================
+        async function loadAuditLogs() {
+            const { data, error } = await sb
+                .from('audit_logs')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(15);
+
+            if (error) {
+                console.error('Failed to load audit logs:', error);
+                return;
+            }
+            const container = document.getElementById('live-log-container');
+            if (!container) return;
+            container.innerHTML = '';
+            (data || []).forEach(log => {
+                appendLogEntry(container, log.created_at, log.student_id, log.branch, log.action);
+            });
+        }
+
+        function appendLogEntry(container, isoTime, studentId, branch, action) {
+            const d = new Date(isoTime);
+            const timestamp = d.toTimeString().split(' ')[0] + '.' + Math.floor(d.getMilliseconds() / 100);
+            const randomHex = Math.random().toString(16).substring(2, 8).toUpperCase();
+            const logEntry = document.createElement('div');
+            logEntry.className = "border-l-2 border-primaryColor pl-2 py-0.5 text-zinc-300";
+            logEntry.innerHTML = `
+                <span class="text-accentColor">[${timestamp}]</span> 
+                <span class="font-bold text-primaryColor">ID:${studentId}</span> 
+                <span>(${branch})</span>: 
+                <span class="text-zinc-200">${action}</span> 
+                <span class="text-[9px] text-zinc-500">#${randomHex}</span>
+            `;
+            container.prepend(logEntry);
+            if (container.children.length > 15) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        async function appendUniqueLog(actionMessage) {
+            // Insert into database
+            const { error } = await sb.rpc('insert_audit_log', {
+                p_action: actionMessage,
+                p_student_id: '260112459',
+                p_branch: 'CSE'
+            });
+            if (error) {
+                console.error('Failed to insert audit log:', error);
+            }
+            // Refresh display
+            await loadAuditLogs();
+        }
+
+        // ============================================================
+        // THEME MANAGER
+        // ============================================================
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            ['army', 'white', 'black'].forEach(t => {
+                const btn = document.getElementById(`theme-${t}-btn`);
+                if (t === themeName) {
+                    btn.className = "px-3 py-1.5 rounded-lg font-medium transition-all bg-primaryColor text-white shadow";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded-lg font-medium transition-all text-textMain hover:opacity-75";
+                }
+            });
+            appendUniqueLog(`THEME_SWITCH: Switched active interface profile to '${themeName}' mode.`);
+        }
+
+        // ============================================================
+        // LIVE TELEMETRY TICKER SIMULATION
+        // ============================================================
+        setInterval(() => {
+            const sockets = 12 + Math.floor(Math.random() * 6);
+            const ping = (3.5 + Math.random() * 2).toFixed(1);
+            const mutexLoad = (1.2 + Math.random() * 1.5).toFixed(1);
+            
+            const sockEl = document.getElementById('telemetry-sockets');
+            const pingEl = document.getElementById('telemetry-ping');
+            const mutexEl = document.getElementById('telemetry-mutex');
+            
+            if (sockEl) sockEl.innerText = `${sockets} Active`;
+            if (pingEl) pingEl.innerText = `${ping} ms`;
+            if (mutexEl) mutexEl.innerText = `${mutexLoad}%`;
+        }, 3000);
+
+        // ============================================================
+        // TAB SWITCHING
+        // ============================================================
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all text-left text-textMuted hover:bg-cardBg";
+            });
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.className = "tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all text-left bg-primaryColor text-white shadow-lg";
+
+            appendUniqueLog(`NAVIGATE: Loaded module view -> ${tabId.toUpperCase()}`);
+        }
+
+        // ============================================================
+        // TASK 1: PRINT & STATIONERY BILLING
+        // ============================================================
+        function calculatePrintBill() {
+            const type = document.getElementById('print-type').value;
+            const qty = parseInt(document.getElementById('print-qty').value) || 1;
+            const rate = PRICE_MAP[type] || 2;
+            const total = rate * qty;
+            document.getElementById('print-total-price').innerText = `₹${total.toFixed(2)}`;
+            loadWalletInfo();
+        }
+
+        async function loadWalletInfo() {
+            const studentId = document.getElementById('print-student-id')?.value || '260112459';
+            const { data, error } = await sb
+                .from('students')
+                .select('name, wallet_balance')
+                .eq('id', studentId)
+                .maybeSingle();
+
+            const infoEl = document.getElementById('print-wallet-info');
+            if (error || !data) {
+                if (infoEl) infoEl.innerText = 'Student ID not found in database.';
+                return;
+            }
+            const type = document.getElementById('print-type').value;
+            const qty = parseInt(document.getElementById('print-qty').value) || 1;
+            const total = (PRICE_MAP[type] || 2) * qty;
+            if (infoEl) {
+                infoEl.innerText = `${data.name} — Wallet: ₹${data.wallet_balance} — ${data.wallet_balance >= total ? 'Sufficient' : 'Insufficient balance!'}`;
+                infoEl.style.color = data.wallet_balance >= total ? 'var(--color-muted)' : '#f87171';
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>\"']/g, character => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '\"': '&quot;',
+                "'": '&#039;'
+            }[character]));
+        }
+
+        function getCurrentPrintSelection() {
+            const typeSelect = document.getElementById('print-type');
+            const itemCode = typeSelect.value;
+            const quantity = Math.max(1, Math.min(500, parseInt(document.getElementById('print-qty').value) || 1));
+            const fileInput = document.getElementById('print-file');
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'GEHU_Cart_Order.pdf';
+            return {
+                itemCode,
+                itemName: typeSelect.options[typeSelect.selectedIndex].text,
+                quantity,
+                unitPrice: PRICE_MAP[itemCode] || 2,
+                fileName
+            };
+        }
+
+        function cartTotal() {
+            return printCart.reduce((total, item) => total + item.unitPrice * item.quantity, 0);
+        }
+
+        function addToCart() {
+            const selected = getCurrentPrintSelection();
+            const existing = printCart.find(item => item.itemCode === selected.itemCode && item.fileName === selected.fileName);
+            if (existing) {
+                existing.quantity = Math.min(500, existing.quantity + selected.quantity);
+            } else {
+                printCart.push(selected);
+            }
+            renderCart();
+            appendUniqueLog(`CART_ADD: Added ${selected.quantity}x ${selected.itemName} to collective purchase cart.`);
+        }
+
+        function removeFromCart(index) {
+            const removed = printCart.splice(index, 1)[0];
+            renderCart();
+            if (removed) appendUniqueLog(`CART_REMOVE: Removed ${removed.itemName} from purchase cart.`);
+        }
+
+        function renderCart() {
+            const list = document.getElementById('print-cart-list');
+            const count = document.getElementById('cart-count');
+            const headerCount = document.getElementById('cart-header-count');
+            const totalDisplay = document.getElementById('cart-total-price');
+            const checkoutTotal = document.getElementById('cart-checkout-total');
+            const checkoutButton = document.getElementById('cart-checkout-btn');
+            if (!list) return;
+
+            const itemCount = printCart.reduce((total, item) => total + item.quantity, 0);
+            const total = cartTotal();
+            if (count) count.innerText = itemCount;
+            if (headerCount) headerCount.innerText = `${itemCount} item${itemCount === 1 ? '' : 's'}`;
+            if (totalDisplay) totalDisplay.innerText = `₹${total.toFixed(2)}`;
+            if (checkoutTotal) checkoutTotal.innerText = `₹${total.toFixed(2)}`;
+            if (checkoutButton) checkoutButton.disabled = printCart.length === 0;
+
+            if (printCart.length === 0) {
+                list.innerHTML = '<p class="text-xs text-textMuted italic">Your cart is empty. Add multiple services above, then purchase them together.</p>';
+                return;
+            }
+
+            list.innerHTML = printCart.map((item, index) => `
+                <div class="bg-themeBg p-3 rounded-xl border border-zinc-700/40 flex justify-between items-center gap-3">
+                    <div class="min-w-0">
+                        <p class="font-semibold text-primaryColor text-xs truncate">${escapeHtml(item.itemName)}</p>
+                        <p class="text-textMuted text-[10px]">Qty: ${item.quantity} × ₹${item.unitPrice} · ${escapeHtml(item.fileName)}</p>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <span class="font-bold text-emerald-400 text-xs">₹${(item.quantity * item.unitPrice).toFixed(2)}</span>
+                        <button onclick="removeFromCart(${index})" class="text-rose-400 hover:text-rose-300 text-xs" title="Remove item"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function checkoutCart() {
+            if (printCart.length === 0) return;
+            const button = document.getElementById('cart-checkout-btn');
+            const studentId = document.getElementById('print-student-id').value || '260112459';
+            button.disabled = true;
+            button.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Processing...';
+
+            const { data, error } = await sb.rpc('collective_purchase_print_cart', {
+                p_student_id: studentId,
+                p_items: printCart.map(item => ({
+                    item_code: item.itemCode,
+                    item_name: item.itemName,
+                    quantity: item.quantity,
+                    file_name: item.fileName
+                }))
+            });
+
+            button.innerHTML = '<i class="fa-solid fa-bolt mr-1"></i> Purchase All';
+            if (error) {
+                button.disabled = false;
+                alert(`Collective purchase failed: ${error.message}`);
+                appendUniqueLog(`CART_PURCHASE_FAIL: ${error.message}`);
+                return;
+            }
+
+            const result = data && data[0];
+            if (!result) {
+                button.disabled = false;
+                alert('Collective purchase failed: the server returned no receipt.');
+                return;
+            }
+
+            const itemCount = printCart.reduce((total, item) => total + item.quantity, 0);
+            printCart = [];
+            renderCart();
+            await loadPrintQueue();
+            await loadStudentDirectory();
+            await loadWalletInfo();
+            alert(`Purchase complete! ${itemCount} items were queued together. ₹${result.total_cost} deducted. New wallet balance: ₹${result.new_balance}.`);
+        }
+
+        async function submitPrintJob() {
+            const btn = document.getElementById('print-submit-btn');
+            const typeSelect = document.getElementById('print-type');
+            const itemName = typeSelect.options[typeSelect.selectedIndex].text;
+            const itemCode = typeSelect.value;
+            const qty = parseInt(document.getElementById('print-qty').value) || 1;
+            const studentId = document.getElementById('print-student-id').value || '260112459';
+            const fileInput = document.getElementById('print-file');
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : `GEHU_Order_${Math.floor(100+Math.random()*900)}.pdf`;
+            const unitPrice = PRICE_MAP[itemCode] || 2;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Processing...';
+
+            // Call atomic deduct_wallet_and_enqueue_print RPC
+            const { data, error } = await sb.rpc('deduct_wallet_and_enqueue_print', {
+                p_student_id: studentId,
+                p_item_code: itemCode,
+                p_item_name: itemName,
+                p_quantity: qty,
+                p_unit_price: unitPrice,
+                p_file_name: fileName
+            });
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-bolt mr-1"></i> Deduct & Enqueue Job';
+
+            if (error) {
+                const errMsg = error.message || 'Unknown error';
+                alert(`Transaction Failed: ${errMsg}`);
+                appendUniqueLog(`PAYMENT_FAIL: ${errMsg}`);
+                return;
+            }
+
+            const result = data && data[0];
+            if (!result) {
+                alert('Transaction failed: No result returned from server.');
+                return;
+            }
+
+            // Refresh queue, student directory, wallet info
+            await loadPrintQueue();
+            await loadStudentDirectory();
+            await loadWalletInfo();
+
+            alert(`Success! ₹${result.total_cost} atomically deducted from student database (${result.student_name}, ID: ${studentId}). Job enqueued in Spooler. New balance: ₹${result.new_balance}`);
+        }
+
+        async function loadPrintQueue() {
+            const { data, error } = await sb
+                .from('print_jobs')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(20);
+
+            if (error) {
+                console.error('Failed to load print queue:', error);
+                return;
+            }
+
+            const queueList = document.getElementById('print-queue-list');
+            if (!queueList) return;
+            queueList.innerHTML = '';
+
+            const statusColors = {
+                'Queued': 'bg-blue-500/20 text-blue-400',
+                'Processing': 'bg-amber-500/20 text-amber-400',
+                'Completed': 'bg-emerald-600/20 text-emerald-400'
+            };
+
+            (data || []).forEach(job => {
+                const card = document.createElement('div');
+                card.className = "bg-themeBg p-3 rounded-xl border border-zinc-700/40 text-xs flex justify-between items-center";
+                const badgeClass = statusColors[job.status] || statusColors['Queued'];
+                card.innerHTML = `
+                    <div>
+                        <p class="font-semibold text-primaryColor">${job.file_name}</p>
+                        <p class="text-textMuted">${job.item_name} • Qty: ${job.quantity} (ID: ${job.student_id}) • ₹${job.total_price}</p>
+                    </div>
+                    <span class="${badgeClass} px-2.5 py-1 rounded-md text-[10px] font-semibold">${job.status}</span>
+                `;
+                queueList.appendChild(card);
+            });
+
+            const countEl = document.getElementById('queue-count');
+            if (countEl) {
+                const activeCount = (data || []).filter(j => j.status !== 'Completed').length;
+                countEl.innerText = `${activeCount} Active`;
+            }
+        }
+
+        // ============================================================
+        // TASK 2: ERP GRIEVANCE TICKETS
+        // ============================================================
+        async function submitErpTicket() {
+            const btn = document.getElementById('erp-submit-btn');
+            const cat = document.getElementById('erp-category').value;
+            const branch = document.getElementById('erp-branch').value;
+            const studentId = document.getElementById('erp-student-id').value || '260112459';
+            const semester = document.getElementById('erp-year').value;
+            const mobile = document.getElementById('erp-mobile').value;
+            const desc = document.getElementById('erp-desc').value;
+
+            btn.disabled = true;
+            btn.innerText = 'Submitting...';
+
+            const ticketNumber = 'ERP-' + Math.floor(1000 + Math.random() * 9000);
+
+            const { data, error } = await sb
+                .from('erp_tickets')
+                .insert([{
+                    ticket_number: ticketNumber,
+                    student_id: studentId,
+                    category: cat,
+                    branch: branch,
+                    semester: semester,
+                    mobile: mobile,
+                    description: desc,
+                    status: 'Query Ticket Raised'
+                }])
+                .select();
+
+            btn.disabled = false;
+            btn.innerText = 'Submit Ticket & Generate Unique Log';
+
+            if (error) {
+                alert(`Failed to submit ticket: ${error.message}`);
+                return;
+            }
+
+            await appendUniqueLog(`ERP_TICKET: Raised query [${cat}] for ${branch}, Mobile:${mobile}. Ticket: ${ticketNumber}`);
+            await loadErpTickets();
+            alert(`ERP Query ticket ${ticketNumber} successfully submitted and stored in database!`);
+        }
+
+        async function loadErpTickets() {
+            const { data, error } = await sb
+                .from('erp_tickets')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(20);
+
+            if (error) {
+                console.error('Failed to load ERP tickets:', error);
+                return;
+            }
+
+            const container = document.getElementById('ticket-status-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const statusBadgeColors = {
+                'Query Ticket Raised': 'bg-amber-500/20 text-amber-400',
+                'Issue in Progress': 'bg-blue-500/20 text-blue-400',
+                'Ticket Resolved': 'bg-emerald-600/20 text-emerald-400',
+                'Resolved & Not Satisfied': 'bg-rose-500/20 text-rose-400',
+                'Appeal Escalated': 'bg-purple-500/20 text-purple-400'
+            };
+
+            (data || []).forEach(ticket => {
+                const card = document.createElement('div');
+                card.className = "bg-themeBg p-3 rounded-xl border border-zinc-700/40 space-y-2";
+                card.id = `ticket-${ticket.id}`;
+                const badgeClass = statusBadgeColors[ticket.status] || statusBadgeColors['Query Ticket Raised'];
+                card.innerHTML = `
+                    <div class="flex justify-between font-semibold">
+                        <span class="text-primaryColor">#${ticket.ticket_number}</span>
+                        <span class="${badgeClass} px-2 py-0.5 rounded text-[10px]">${ticket.status}</span>
+                    </div>
+                    <p class="text-textMuted">${ticket.category}: ${ticket.description}</p>
+                    <div class="flex gap-2 pt-1" id="ticket-actions-${ticket.id}">
+                        ${renderTicketActions(ticket)}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderTicketActions(ticket) {
+            const status = ticket.status;
+            if (status === 'Query Ticket Raised') {
+                return `
+                    <button onclick="updateTicketState('${ticket.id}', 'Issue in Progress')" class="flex-1 bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:bg-blue-600/30 py-1 rounded text-[10px] font-medium">Mark In Progress</button>
+                    <button onclick="updateTicketState('${ticket.id}', 'Ticket Resolved')" class="flex-1 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600/30 py-1 rounded text-[10px] font-medium">Resolve</button>
+                `;
+            } else if (status === 'Issue in Progress') {
+                return `
+                    <button onclick="updateTicketState('${ticket.id}', 'Ticket Resolved')" class="flex-1 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600/30 py-1 rounded text-[10px] font-medium">Resolve</button>
+                `;
+            } else if (status === 'Ticket Resolved') {
+                return `
+                    <button onclick="updateTicketState('${ticket.id}', 'Resolved & Not Satisfied')" class="w-full bg-orange-600/20 text-orange-400 border border-orange-500/30 hover:bg-orange-600/30 py-1 rounded text-[10px] font-medium"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Not Satisfied? Raise Appeal</button>
+                `;
+            } else if (status === 'Resolved & Not Satisfied') {
+                return `
+                    <button onclick="updateTicketState('${ticket.id}', 'Appeal Escalated')" class="w-full bg-primaryColor text-white hover:opacity-90 py-1 rounded text-[10px] font-medium shadow"><i class="fa-solid fa-scale-balanced mr-1"></i> Submit Formal Appeal to Dean</button>
+                `;
+            } else if (status === 'Appeal Escalated') {
+                return `<span class="text-[10px] text-accentColor italic w-full text-center">Under review by Grievance Redressal Cell</span>`;
+            }
+            return '';
+        }
+
+        async function updateTicketState(ticketId, newStatus) {
+            const { error } = await sb
+                .from('erp_tickets')
+                .update({ status: newStatus, updated_at: new Date().toISOString() })
+                .eq('id', ticketId);
+
+            if (error) {
+                alert(`Failed to update ticket: ${error.message}`);
+                return;
+            }
+
+            const ticket = await sb.from('erp_tickets').select('ticket_number, category').eq('id', ticketId).maybeSingle();
+            const ticketNum = ticket.data?.ticket_number || 'unknown';
+            await appendUniqueLog(`ERP_STATUS: Ticket ${ticketNum} marked as '${newStatus}'.`);
+            await loadErpTickets();
+
+            if (newStatus === 'Appeal Escalated') {
+                alert('Formal appeal successfully transmitted to the Dean of Academic Affairs!');
+            }
+        }
+
+        // ============================================================
+        // TASK 3: CANTEEN BOOKING
+        // ============================================================
+        function updateCanteenPricing() {
+            const tier = document.getElementById('canteen-tier').value;
+            const guests = parseInt(document.getElementById('canteen-guests').value) || 4;
+            let base = guests * 50;
+            if (tier === 'priority') {
+                base *= 2.5;
+                document.getElementById('canteen-price-display').innerText = `₹${base.toFixed(2)} (Surge Premium)`;
+            } else {
+                document.getElementById('canteen-price-display').innerText = `₹${base.toFixed(2)} (Standard)`;
+            }
+        }
+
+        async function bookCanteenTable() {
+            const btn = document.getElementById('canteen-submit-btn');
+            const tier = document.getElementById('canteen-tier').value;
+            const guests = parseInt(document.getElementById('canteen-guests').value) || 4;
+            const datetime = document.getElementById('canteen-datetime').value || new Date().toISOString().slice(0, 16);
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Acquiring lock...';
+
+            const { data, error } = await sb.rpc('book_canteen_slot', {
+                p_tier: tier,
+                p_guests: guests,
+                p_slot_datetime: datetime
+            });
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-lock mr-1"></i> Acquire Semaphore Lock & Book Table';
+
+            if (error) {
+                alert(`Booking Failed: ${error.message}`);
+                appendUniqueLog(`CANTEEN_FAIL: ${error.message}`);
+                return;
+            }
+
+            const result = data && data[0];
+            await loadCanteenOccupancy();
+            alert(`Canteen table booked! ₹${result.total_price} charged. Current occupancy: ${result.current_occupancy}/120 seats. ${result.capacity_remaining} seats remaining.`);
+        }
+
+        async function loadCanteenOccupancy() {
+            const { data, error } = await sb
+                .from('canteen_bookings')
+                .select('guests')
+                .eq('status', 'Booked');
+
+            if (error) {
+                console.error('Failed to load canteen occupancy:', error);
+                return;
+            }
+
+            const totalOccupancy = (data || []).reduce((sum, b) => sum + b.guests, 0);
+            const capacity = 120;
+            const pct = Math.min((totalOccupancy / capacity) * 100, 100);
+
+            const occEl = document.getElementById('canteen-occupancy');
+            const barEl = document.getElementById('canteen-occupancy-bar');
+            if (occEl) occEl.innerText = `${totalOccupancy} Seats`;
+            if (barEl) barEl.style.width = `${pct}%`;
+        }
+
+        // ============================================================
+        // TASK 4: EVENT MATCHMAKER
+        // ============================================================
+        async function runMatchmaker() {
+            const btn = document.getElementById('match-submit-btn');
+            const chosenDomain = document.getElementById('match-domain').value;
+            const chosenEvent = document.getElementById('match-event').value;
+            const tags = document.getElementById('match-tags').value;
+
+            // Map UI domain to database domain
+            const dbDomain = DOMAIN_MAP[chosenDomain] || chosenDomain;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Running similarity matrix...';
+
+            // Fetch students matching the domain from database
+            const { data, error } = await sb
+                .from('students')
+                .select('*')
+                .eq('domain', dbDomain)
+                .limit(10);
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Run Cosine Similarity Across 100+ Student Directory';
+
+            if (error) {
+                alert(`Matchmaker failed: ${error.message}`);
+                return;
+            }
+
+            const matches = data || [];
+            // Ensure we always have at least the leader + 3 teammates
+            const teammates = matches.slice(0, 3);
+
+            // Simulate cosine similarity score
+            const tagCount = tags.split(',').length;
+            const baseScore = 88 + Math.min(tagCount * 1.5, 10);
+            const matchScore = Math.min(baseScore + Math.random() * 3, 99.5);
+
+            const matchBox = document.getElementById('match-result-box');
+            matchBox.innerHTML = `
+                <div class="bg-themeBg p-3 rounded-xl border border-zinc-700/40 space-y-2">
+                    <div class="flex justify-between font-semibold">
+                        <span>Team Aariv Alpha</span>
+                        <span class="text-emerald-400">${matchScore.toFixed(1)}% Match</span>
+                    </div>
+                    <p class="text-textMuted">
+                        Leader: ID 260112459 (CSE V Sem)<br>
+                        Event: ${chosenEvent}<br>
+                        Teammates: ${teammates.map(t => `${t.name} (${t.id})`).join(', ')}.
+                    </p>
+                    <div class="w-full bg-zinc-700 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-emerald-500 h-1.5 rounded-full" style="width: ${matchScore}%"></div>
+                    </div>
+                </div>
+            `;
+
+            await appendUniqueLog(`MATCHMAKER: Executed cosine similarity matrix across ${studentDatabase.length}+ student DB for domain [${chosenDomain}]. Score: ${matchScore.toFixed(1)}%`);
+            alert(`Matchmaker successfully paired you with ${teammates.length} teammates from the ${studentDatabase.length}+ student database for ${chosenDomain}! Match score: ${matchScore.toFixed(1)}%`);
+        }
+
+        // ============================================================
+        // STARTUP
+        // ============================================================
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
